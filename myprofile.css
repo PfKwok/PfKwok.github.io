@@ -1,0 +1,14 @@
+.my-photo{
+    background-image: url("TheGabba.jpeg");
+
+    background-attachment: fixed;
+    background-position: 10% 90%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.my-text{
+    color: white;
+    background-color: rgba(0,0,0,0.5);
+    padding: 10px;
+}

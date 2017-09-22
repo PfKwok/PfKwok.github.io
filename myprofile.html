@@ -19,11 +19,14 @@
 
             <div class="col-sm-10 col-md-6 col-lg-4 my-text">
 
-                <h1>Welcome!</h1>
+                <br><h1>Welcome!</h1><br>
 
                 <p>ABCD EFGH IJKL MNOP QRST UVWX YZ</p>
+                <p>ABCD EFGH IJKL MNOP QRST UVWX YZ</p>
+                <p>ABCD EFGH IJKL MNOP QRST UVWX YZ</p>
+                <p>ABCD EFGH IJKL MNOP QRST UVWX YZ</p>
 
-                <form action="#" method="POST">
+                <form action="https://script.google.com/macros/s/AKfycbywbDDvkA1Ew61WTC3tImfpB8JEWQtwcmJW0_3VyYgl0HKrgQno/exec" method="POST">
 
                     <div class="form-group">
                         <label for="name-id">Name</label>
@@ -56,5 +59,66 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
         crossorigin="anonymous"></script>
 </body>
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
+
+<script>
+
+$(function () {
+
+    // on submitting the form
+    $('form').submit(function (event) {
+        // prevent the default action of reloading the page
+        event.preventDefault();
+
+        var sendData = {};
+        $(event.target.nodeName + ' :input').each(function(){
+            sendData[this.name] = $(this).val();
+        });
+
+        var posting = $.ajax({
+            type: 'POST',
+            url: $(event.target.nodeName).prop('action'),
+            data: sendData
+        });
+
+        posting.done(function (response) {
+            console.log(response);
+            $('#alert-id').prop('hidden', false);
+            $('form :input').each(function(){
+                $(this).val('');
+            })
+        });
+        posting.fail(function (response) {
+            console.log(response);
+        });
+    });
+
+// RESPONSE ALERT WINDOW-------------------------------------------------------------------------------
+/* include the following HTML to use:
+<div class="form-group">
+    <button type="submit" class="btn btn-default my-btn form-control" id="submit-id">submit</button>                   
+    <div class="alert alert-danger alert-dismissible fade in" hidden id="alert-id">
+        <button type="button" class="close" id="close-id"><span>&times;</span></button>
+        Thank you! We'll get in touch.
+    </div>
+</div>
+*/
+
+    // on clicking the X button
+    $('#close-id').click(function(){
+        // hide the alert panel by adding the hidden property
+        $('#alert-id').prop('hidden', true);
+    });
+
+});
+
+
+
+
+</script>
+
 
 </html>
